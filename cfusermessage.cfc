@@ -12,7 +12,7 @@ component accessors="true" displayname="CFUserMessage"  {
 		return this;
 	}
 
-	public core.IMessagesContainer function getContainer(required struct rc) {
+	public IMessagesContainer function getContainer(required struct rc) {
 		if (! structKeyExists(rc,getRefName())) {
 			rc[getRefName()] = new messagesContainer();
 		} 		
@@ -26,12 +26,10 @@ component accessors="true" displayname="CFUserMessage"  {
 		return;
 	}
 
-	public boolean function has(required struct rc)
+	public boolean function has(required struct rc, string filter = "", string filterBy = "type")
 	description = "Checks that message container is defined in request context and that it qualifies as such."
 	{
-		return 
-			structKeyExists(rc,getRefName())  && 
-			ArrayLen(getContainer(rc).getMessages());
+		return structKeyExists(rc,getRefName()) && ArrayLen(getContainer(rc).getMessages(filter, filterBy));
 	}
 
 	public array function get(required struct rc, string filter = "", string filterBy = "type")

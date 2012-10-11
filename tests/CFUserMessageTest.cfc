@@ -34,6 +34,11 @@
 		// Check that has() returns true now
 		assertTrue(variables.cfusrmsg.has(rc), "There must be messages at this point");
 
+		// Check that there are messages of the certain type
+		assertTrue(variables.cfusrmsg.has(rc,"error"));
+		assertTrue(variables.cfusrmsg.has(rc,"info"));
+		assertFalse(variables.cfusrmsg.has(rc,"success"));
+
 		// Now check that the number of messages is correct
 		assertEquals(ArrayLen(messagesSet1),ArrayLen(variables.cfusrmsg.get(rc)),"The count of messages must be equal to len of messagesSet1");
 
